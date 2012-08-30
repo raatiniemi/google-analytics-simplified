@@ -64,7 +64,7 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 */
 	add_action( 'wp_footer', function() {
 		// We need to check that the current request is not a preview request,
-        // since we'd rather not track post those.
+		// since we'd rather not track post those.
 		if( ! is_preview() ) {
 			require( __DIR__ . '/template/code.php' );
 		}
