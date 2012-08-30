@@ -63,8 +63,8 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @since 0.0.1
 	 */
 	add_action( 'wp_footer', function() {
-		// We need to check that the current request is not a preview request, since
-		// we'd rather not track post those.
+		// We need to check that the current request is not a preview request,
+        // since we'd rather not track post those.
 		if( ! is_preview() ) {
 			require( __DIR__ . '/template/code.php' );
 		}
@@ -80,8 +80,8 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @since 0.0.1
 	 */
 	register_activation_hook( __FILE__, function() {
-		add_option( 'ga-domain-name', 'domain.com' );
-		add_option( 'ga-property-id', 'UA-XXXXXXX-X' );
+		add_option( 'ga-domain-name', null );
+		add_option( 'ga-property-id', null );
 	} );
 
 	/**
