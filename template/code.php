@@ -3,16 +3,34 @@
 // | This file is a part of the Google Analytics simplified WordPress plugin.  |
 // | Copyright (c) 2012, Tobias Raatiniemi <me@thedeveloperblog.net>.          |
 // +---------------------------------------------------------------------------+
-// +---------------------------------------------------------------------------+
-// | Retrieve the value for the ga-* specific settings.                        |
-// +---------------------------------------------------------------------------+
-	$domain = get_option( 'ga-domain-name', null );
+	/**
+	 * Retrieve and fix the website domain name.
+	 *
+	 * @return string Fixed domain name for the current website.
+	 *
+	 * @author Tobias Raatiniemi <me@thedeveloperblog.net>
+	 *
+	 * @since 0.0.1
+	 */
+	$domain = function() {
+		// Remove the protocol, http or https, and the trailing slash from the
+		// URL that the "get_site_url"-function returns.
+		//
+		// We only want to pass the domain name to Google Analytics.
+		return (string) preg_replace(
+			'/^(https?:\/\/)/i',
+			'',
+			rtrim( get_site_url(), '/' )
+		);
+	};
+	// Retrieve the Google Analytics property ID, default to null.
+	// This way we can check if we should print the snippet.
 	$property_id = get_option( 'ga-property-id', null );
 ?>
 <?php if( $property_id !== null ) : ?>
 <script>
 	var _gaq=[
-		<?=($domain !== null ? "['_setDomainName', '{$domain}']," : null); ?>
+		['_setDomainName', '<?=$domain(); ?>'],
 		['_setAccount','<?=$property_id; ?>'],
 		['_trackPageview']
 	];

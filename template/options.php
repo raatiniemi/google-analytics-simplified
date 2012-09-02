@@ -19,15 +19,6 @@
 					<p class="description"><?php _e( 'The ID for the Google Analytics property. Can be found on the Google Analytics account list, i.e. <strong>the UA-XXXXXXX-X formatted code</strong>.', 'google-analytics-simplified' ); ?></p>
 				</td>
 			</tr>
-			<tr valign="top">
-				<th scope="row">
-					<label for="ga-domain-name"><?php _e( 'Domain name:', 'google-analytics-simplified' ); ?></label>
-				</th>
-				<td>
-					<input type="text" id="ga-domain-name" name="ga-domain-name" value="<?php echo get_option( 'ga-domain-name' ); ?>" class="regular-text" />
-					<p class="description"><?php _e( 'The domain specified in the tracking options on Google Analytics, e.g. www.thedeveloperblog.net.', 'google-analytics-simplified' ); ?></p>
-				</td>
-			</tr>
 		</table>
 		<input type="hidden" name="action" value="update" />
 		<p class="submit">

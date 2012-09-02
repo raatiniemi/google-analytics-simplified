@@ -28,8 +28,32 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @todo Add the sanitize callback functions for the setting items.
 	 */
 	add_action( 'admin_init', function() {
-		register_setting( 'google-analytics-simplified', 'ga-domain-name' );
-		register_setting( 'google-analytics-simplified', 'ga-property-id' );
+		register_setting(
+			'google-analytics-simplified',
+			'ga-property-id',
+			function( $value ) {
+				// Check if the given value matches the excepted format of
+				// a Google Analytics property ID, i.e. UA-XXXXXXX-X.
+				if( preg_match( '/^(UA-([0-9]+)-([0-9]{1}))$/i', $value ) == false ) {
+					// It would appear that the given code did not match
+					// the format. Set up a new WordPress settings error
+					// with an explaining text to the user.
+					add_settings_error(
+						'ga-property-id',
+						'invalid-ga-property-id',
+						__( 'The Google Analytics property ID do not match '.
+						'the excepted format.', 'google-analytics-simplified' )
+					);
+
+					// Reset the value of the field to null, we don't want
+					// rogue property ID on live websites.
+					$value = null;
+				}
+
+				// Apply the functionality filter and return the value.
+				return apply_filters( 'validate-ga-property-id', $value );
+			}
+		);
 	} );
 
 	/**
@@ -48,6 +72,7 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 			'manage_options',
 			'google-analytics-simplified',
 			function() {
+				// Include the options template.
 				require( __DIR__ . '/template/options.php' );
 			}
 		);
@@ -66,6 +91,7 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 		// We need to check that the current request is not a preview request,
 		// since we'd rather not track post those.
 		if( ! is_preview() ) {
+			// Include the code template.
 			require( __DIR__ . '/template/code.php' );
 		}
 	} );
@@ -80,7 +106,9 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @since 0.0.1
 	 */
 	register_activation_hook( __FILE__, function() {
-		add_option( 'ga-domain-name', null );
+		// Add a default value to the Google Analytics property ID. This value
+		// will be checked on the code template, i.e. if it is null, we won't
+		// print the snippet.
 		add_option( 'ga-property-id', null );
 	} );
 
@@ -94,7 +122,8 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @since 0.0.1
 	 */
 	register_deactivation_hook( __FILE__, function() {
-		delete_option( 'ga-domain-name' );
+		// When the plugin is deactivated, we need to remove our options from
+		// the database. It's not very polite to clutter up someones database!
 		delete_option( 'ga-property-id' );
 	} );
 }
