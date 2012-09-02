@@ -27,7 +27,7 @@
 	// This way we can check if we should print the snippet.
 	$property_id = get_option( 'ga-property-id', null );
 ?>
-<?php if( $property_id !== null ) : ?>
+<?php if( empty( $property_id ) == false ) : ?>
 <script>
 	var _gaq=[
 		['_setDomainName', '<?=$domain(); ?>'],
