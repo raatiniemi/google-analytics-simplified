@@ -24,8 +24,6 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 * @author Tobias Raatiniemi <me@thedeveloperblog.net>
 	 *
 	 * @since 0.0.1
-	 *
-	 * @todo Add the sanitize callback functions for the setting items.
 	 */
 	add_action( 'admin_init', function() {
 		register_setting(
