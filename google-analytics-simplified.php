@@ -32,12 +32,16 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 			'google-analytics-simplified',
 			'ga-property-id',
 			function( $value ) {
+				// The value can be empty, which will just remove the
+				// snippet from the wp_footer hook.
+				if( empty( $value ) == true ) {
+					$value = null;
+
 				// Check if the given value matches the excepted format of
 				// a Google Analytics property ID, i.e. UA-XXXXXXX-X.
-				if( preg_match( '/^(UA-([0-9]+)-([0-9]{1}))$/i', $value ) == false ) {
-					// It would appear that the given code did not match
-					// the format. Set up a new WordPress settings error
-					// with an explaining text to the user.
+				} elseif( preg_match( '/^(UA-([0-9]+)-([0-9]{1}))$/i', $value ) == false ) {
+					// Set up a new WordPress settings error with an
+					// explaining text to the user.
 					add_settings_error(
 						'ga-property-id',
 						'invalid-ga-property-id',
@@ -127,5 +131,5 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 		delete_option( 'ga-property-id' );
 	} );
 }
-// End of file: google-analytics.php
-// Location: google-analytics.php
+// End of file: google-analytics-simplified.php
+// Location: google-analytics-simplified.php
