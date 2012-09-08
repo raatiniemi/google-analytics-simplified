@@ -62,7 +62,7 @@ namespace TheDeveloperBlog\WordPress\GoogleAnalyticsSimplified
 	 */
 	add_action( 'admin_menu', function() {
 		add_options_page(
-			__( 'Google Analytics simplified', 'google-analytics-simplified' ),
+			'Google Analytics simplified',
 			'Google Analytics',
 			'manage_options',
 			'google-analytics-simplified',

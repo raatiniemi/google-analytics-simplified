@@ -47,7 +47,7 @@ function ga_simplified_initialize()
 	load_plugin_textdomain(
 		'google-analytics-simplified',
 		false,
-		dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+		basename( dirname( __FILE__ ) ) . '/languages'
 	);
 }
 
