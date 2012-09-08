@@ -12,7 +12,7 @@
  * Author: Tobias Raatiniemi
  * Author URI: http://www.thedeveloperblog.net
  *
- * Version: 0.0.2
+ * Version: 0.0.3
  */
 // Hook up the initialization function, do some startup work. E.g. load the
 // plugin translations.
