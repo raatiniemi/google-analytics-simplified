@@ -1,16 +1,20 @@
 # [Google Analytics simplified](https://github.com/raatiniemi/google-analytics-simplified/)
 
-Google Analytics simplified is a simple WordPress plugin for adding Google Analytics tracking to a WordPress based site.
+Google Analytics simplified is a WordPress plugin that for adding the Google Analytics tracking code to a WordPress based site.
 
-When the Google Analytics property ID has been entered on the plugin option page (located under Settings), a snippet for Google Analytics will be added to the `wp_footer`-hook in WordPress.
+Once the property ID have been entered on the option page (located under Settings), the tracking snippet will be added to the `wp_footer`-hook in WordPress.
 
-If your theme do not utilizes the `wp_footer`-hook the plugin will not work.
+It supports the preview-mode in WordPress. This means that, when you're previewing a post/page, the views won't be tracked.
 
-The plugin will add the site URL to the snippet, this way no other sites will be tracked.
+## Manual installation
 
-It also support preview-mode. Which means that when you're previewing a post, the snippet will not be displayed and your page views will not be tracked.
+1. Download the plugin.
+1. Extract and upload the folder to your `/wp-content/plugins/` directory.
+1. Activate the plugin from the administration panel.
+1. Go to Settings -> Google Analytics.
+1. Enter your Google Analytics property ID in the field and Save changes.
 
 ## System requirements
 
 * PHP +5.3.
-* WordPress +3.1.
+* WordPress +3.0 (+3.1 is recommended).
